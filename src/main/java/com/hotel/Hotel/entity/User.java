@@ -21,14 +21,22 @@ public class User implements UserDetails {
 
     @NotBlank(message = "Email is required")
     @Column(unique = true)
+
     private long id;
+
     private String email;
     @NotBlank(message = "Name is required")
     private String name;
+
     @NotBlank(message = "Phone Number is required")
     private String phoneNumber;
+
+    @NotBlank(message = "Password is required")
     private String password;
+
     private String role;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Booking> bookings = new ArrayList<>();
 
     @Override
