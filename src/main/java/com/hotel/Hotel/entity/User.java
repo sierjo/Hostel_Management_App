@@ -18,13 +18,12 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @NotBlank(message = "Email is required")
     @Column(unique = true)
-
-    private long id;
-
     private String email;
+
     @NotBlank(message = "Name is required")
     private String name;
 
@@ -33,7 +32,6 @@ public class User implements UserDetails {
 
     @NotBlank(message = "Password is required")
     private String password;
-
     private String role;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -47,6 +45,10 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -68,4 +70,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }
