@@ -130,7 +130,7 @@ public class Utils {
         return userList.stream().map(Utils::mapUserEntityToUserDTO).collect(Collectors.toList());
     }
 
-    public static List<RoomDTO> mapRoomListEntityRoomListDTO(List<Room> roomList) {
+    public static List<RoomDTO> mapRoomListEntityToRoomListDTO(List<Room> roomList) {
         return roomList.stream().map(Utils::mapRoomEntityToRoomDTO).collect(Collectors.toList());
     }
 
