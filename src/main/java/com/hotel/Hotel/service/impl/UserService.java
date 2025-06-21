@@ -45,14 +45,14 @@ public class UserService implements IUserService {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             User savedUser = userRepository.save(user);
             UserDTO userDTO = Utils.mapUserEntityToUserDTO(savedUser);
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setUser(userDTO);
 
         } catch (OurException e) {
-            response.setStatusCOde(400);
+            response.setStatusCode(400);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error Occurred During User Registration" + e.getMessage());
         }
         return response;
@@ -67,7 +67,7 @@ public class UserService implements IUserService {
             var user = userRepository.findByEmail(loginRequest.getEmail()).orElseThrow(() -> new OurException("user Not found"));
 
             var token = jwtUtils.generateToken(user);
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setToken(token);
 
             response.setRole(user.getRole());
@@ -76,10 +76,10 @@ public class UserService implements IUserService {
 
 
         } catch (OurException e) {
-            response.setStatusCOde(404);
+            response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error Occurred During User Registration" + e.getMessage());
         }
         return response;
@@ -91,12 +91,12 @@ public class UserService implements IUserService {
         try {
             List<User> userList = userRepository.findAll();
             List<UserDTO> userDTOList = Utils.mapUserListEntityUserListDTO(userList);
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setMessage("seccessful");
             response.setUserList(userDTOList);
 
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error getting all users " + e.getMessage());
         }
         return response;
@@ -108,14 +108,14 @@ public class UserService implements IUserService {
         try {
             User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new OurException("User Not Found"));
             UserDTO userDTO = Utils.mapUserEntityToUserDTOPlusUserBookingsAndRoom(user);
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setMessage("seccessful");
             response.setUser(userDTO);
         } catch (OurException e) {
-            response.setStatusCOde(404);
+            response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error getto=ing all users " + e.getMessage());
         }
         return response;
@@ -127,14 +127,14 @@ public class UserService implements IUserService {
         try {
             userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new OurException("User Not Found"));
             userRepository.deleteById(Long.valueOf(userId));
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setMessage("seccessful");
 
         } catch (OurException e) {
-            response.setStatusCOde(404);
+            response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error getto=ing all users " + e.getMessage());
         }
         return response;
@@ -146,15 +146,15 @@ public class UserService implements IUserService {
         try {
             User user = userRepository.findById(Long.valueOf(userId)).orElseThrow(() -> new OurException("User Not Found"));
             UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setMessage("seccessful");
             response.setUser(userDTO);
 
         } catch (OurException e) {
-            response.setStatusCOde(404);
+            response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error getto=ing all users " + e.getMessage());
         }
         return response;
@@ -166,15 +166,15 @@ public class UserService implements IUserService {
         try {
             User user = userRepository.findByEmail(email).orElseThrow(() -> new OurException("User Not Found"));
             UserDTO userDTO = Utils.mapUserEntityToUserDTO(user);
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setMessage("seccessful");
             response.setUser(userDTO);
 
         } catch (OurException e) {
-            response.setStatusCOde(404);
+            response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error getto=ing all users " + e.getMessage());
         }
         return response;

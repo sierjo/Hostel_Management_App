@@ -32,18 +32,18 @@ public class RoomController {
     ) {
         if (photo == null || photo.isEmpty() || roomType == null || roomType.isBlank() || roomPrice == null || roomType.isBlank()) {
             Response response = new Response();
-            response.setStatusCOde(400);
+            response.setStatusCode(400);
             response.setMessage("Please provide values for all fields(photo, roomType, roomPrice)");
-            return ResponseEntity.status(response.getStatusCOde()).body(response);
+            return ResponseEntity.status(response.getStatusCode()).body(response);
         }
         Response response = roomService.addNewRoom(photo, roomType, roomPrice, roomDescription);
-        return ResponseEntity.status(response.getStatusCOde()).body(response);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @GetMapping("/all")
     public ResponseEntity<Response> getAllRooms() {
         Response response = roomService.getAllRooms();
-        return ResponseEntity.status(response.getStatusCOde()).body(response);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @GetMapping("/types")
@@ -54,13 +54,13 @@ public class RoomController {
     @GetMapping("/room-by-id/{roomId}")
     public ResponseEntity<Response> getRoomById(@PathVariable long roomId) {
         Response response = roomService.getRoomById(roomId);
-        return ResponseEntity.status(response.getStatusCOde()).body(response);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @GetMapping("/all-available-rooms")
     public ResponseEntity<Response> getAvailableRooms() {
         Response response = roomService.getAllAvailableRooms();
-        return ResponseEntity.status(response.getStatusCOde()).body(response);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @GetMapping("/available-rooms-by-date-and-type")
@@ -71,12 +71,12 @@ public class RoomController {
     ) {
         if (checkInDate == null || roomType == null || roomType.isBlank() || checkOutDate == null) {
             Response response = new Response();
-            response.setStatusCOde(400);
+            response.setStatusCode(400);
             response.setMessage("Please provide values for all fields(checkInDate, roomType, checkOutDate)");
-            return ResponseEntity.status(response.getStatusCOde()).body(response);
+            return ResponseEntity.status(response.getStatusCode()).body(response);
         }
         Response response = roomService.getAvailableRoomsByDataAndType(checkInDate, checkOutDate, roomType);
-        return ResponseEntity.status(response.getStatusCOde()).body(response);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @PutMapping("/upadate/{roomId}")
@@ -88,13 +88,13 @@ public class RoomController {
                                                @RequestParam(value = "roomDescription", required = false) String roomDescription
     ) {
         Response response = roomService.updateRoom(roomId, roomDescription, roomType, roomPrice, photo);
-        return ResponseEntity.status(response.getStatusCOde()).body(response);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
     @DeleteMapping("/delete/{rooId}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Response> deleteRoom(@PathVariable Long rooId) {
         Response response = roomService.deleteRoom(rooId);
-        return ResponseEntity.status(response.getStatusCOde()).body(response);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 }

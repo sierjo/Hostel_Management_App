@@ -50,14 +50,14 @@ public class BookingService implements IBookingService {
             String bookingConfirmationCode = Utils.generatedRandomConfirmationCode(10);
             bookingRequest.setBookingConfirmationCode(bookingConfirmationCode);
             bookingRepository.save(bookingRequest);
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setMessage("seccessful");
             response.setBookingConfirmationCode(bookingConfirmationCode);
         } catch (OurException e) {
-            response.setStatusCOde(404);
+            response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error Saving a booking: " + e.getMessage());
 
         }
@@ -73,14 +73,14 @@ public class BookingService implements IBookingService {
         try {
             Booking booking = bookingRepository.findByBookingConfirmationCode(confirmationCode).orElseThrow(() -> new OurException("Booking Not Found"));
             BookingDTO bookingDTO = Utils.mapBookingsEntityToBookingsDTO(booking);
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setMessage("successful");
             response.setBooking(bookingDTO);
         } catch (OurException e) {
-            response.setStatusCOde(404);
+            response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error Finding a booking: " + e.getMessage());
         }
         return response;
@@ -94,14 +94,14 @@ public class BookingService implements IBookingService {
         try {
             List<Booking> bookingList = bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
             List<BookingDTO> bookingDTOList = Utils.mapBookingListEntityToBookingListDTO(bookingList);
-            response.setStatusCOde(200);
+            response.setStatusCode(200);
             response.setMessage("successful");
             response.setBookingList(bookingDTOList);
         } catch (OurException e) {
-            response.setStatusCOde(404);
+            response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error Getting all booking: " + e.getMessage());
         }
         return response;
@@ -118,10 +118,10 @@ public class BookingService implements IBookingService {
             response.setMessage("successful");
 
         } catch (OurException e) {
-            response.setStatusCOde(404);
+            response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
-            response.setStatusCOde(500);
+            response.setStatusCode(500);
             response.setMessage("Error Cancelling a booking: " + e.getMessage());
         }
         return response;
