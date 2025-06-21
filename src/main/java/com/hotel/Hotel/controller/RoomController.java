@@ -75,7 +75,26 @@ public class RoomController {
             response.setMessage("Please provide values for all fields(checkInDate, roomType, checkOutDate)");
             return ResponseEntity.status(response.getStatusCOde()).body(response);
         }
-        Response response = roomService.addNewRoom(photo, roomType, roomPrice, roomDescription);
+        Response response = roomService.getAvailableRoomsByDataAndType(checkInDate, checkOutDate, roomType);
+        return ResponseEntity.status(response.getStatusCOde()).body(response);
+    }
+
+    @PutMapping("/upadate/{roomId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Response> updateRoom(@PathVariable Long roomId,
+                                               @RequestParam(value = "photo", required = false) MultipartFile photo,
+                                               @RequestParam(value = "roomType", required = false) String roomType,
+                                               @RequestParam(value = "roomPrice", required = false) BigDecimal roomPrice,
+                                               @RequestParam(value = "roomDescription", required = false) String roomDescription
+    ) {
+        Response response = roomService.updateRoom(roomId, roomDescription, roomType, roomPrice, photo);
+        return ResponseEntity.status(response.getStatusCOde()).body(response);
+    }
+
+    @DeleteMapping("/delete/{rooId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<Response> deleteRoom(@PathVariable Long rooId) {
+        Response response = roomService.deleteRoom(rooId);
         return ResponseEntity.status(response.getStatusCOde()).body(response);
     }
 }
