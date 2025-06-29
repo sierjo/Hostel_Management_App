@@ -34,7 +34,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
-                .csrf(Customizer.withDefaults())
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/auth/**", "/rooms/**", "/bookings/**")
                         .permitAll().anyRequest().authenticated())
