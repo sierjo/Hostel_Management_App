@@ -15,11 +15,11 @@ public class BookingController {
     @Autowired
     private IBookingService bookingService;
 
-    @PutMapping("/book-room/{roomId}/{userId}")
+    @PostMapping("/book-room/{roomId}/{userId}")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ResponseEntity<Response> saveBookings(@PathVariable Long roomId,
                                                  @PathVariable Long userId,
-                                                 Booking bookingRequest) {
+                                                 @RequestBody Booking bookingRequest) {
         Response response = bookingService.saveBooking(roomId, userId, bookingRequest);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
