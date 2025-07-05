@@ -115,6 +115,7 @@ public class BookingService implements IBookingService {
         try {
             bookingRepository.findById(bookingId).orElseThrow(() -> new OurException("Booking Does Not Exist"));
             bookingRepository.deleteById(bookingId);
+            response.setStatusCode(200);
             response.setMessage("successful");
 
         } catch (OurException e) {
